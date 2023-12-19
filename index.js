@@ -38,7 +38,7 @@ function validateForm(){
     }
 
     var phone = document.forms['myForm']["fphone"].value;
-    if (phone.length != 10){
+    if (phone.length !== 10){
         seterror("phone", "*Phone number should be of 10 digits!");
         returnval = false;
     }
@@ -48,25 +48,27 @@ function validateForm(){
     const specialCharRegex = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
     const alphanumericRegex = /[a-zA-Z0-9]/;
 
-    const containsUppercase = uppercaseRegex.test(passwordInput);
-    const containsSpecialChar = specialCharRegex.test(passwordInput);
-    const containsAlphanumeric = alphanumericRegex.test(passwordInput);
+    const containsUppercase = uppercaseRegex.test(password);
+    const containsSpecialChar = specialCharRegex.test(password);
+    const containsAlphanumeric = alphanumericRegex.test(password);
 
     if (!containsUppercase || !containsSpecialChar || !containsAlphanumeric) {
-      seterror("password", "Password must contain at least 1 uppercase letter, 1 special character, and a combination of alphabets and numbers.");
+      seterror("pass", "Password must contain at least 1 uppercase letter, 1 special character, and a combination of alphabets and numbers.");
       returnval = false;
     }
    
     var cpassword = document.forms['myForm']["fcpass"].value;
-    if (cpassword != password){
+    if (cpassword !== password){
         seterror("cpass", "*Password and Confirm password should match!");
         returnval = false;
     }
-
-    return returnval;
-    document.getElementById("rform").addEventListener("submit"), function(event) {
-        event.preventDefault(); }// Prevents the form from submitting normally
+    return returnval
+}
+    document.getElementById("rform").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevents the form from submitting normally
+        
+        if (validateForm()){
         // Redirect to confirmation page
-        //window.location.href = "confirmation.html";
-
-    
+        window.location.href = "confirmation.html";}
+    });
+ 
